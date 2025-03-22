@@ -3,8 +3,11 @@ A basic calculator built using HTML, CSS, and JavaScript. This project is a simp
 
 🚀 Features
 ✔ Basic Operations: Addition, Subtraction, Multiplication, Division
+
 ✔ Responsive Design: Works on all screen sizes
+
 ✔ Minimalistic UI: Simple and easy to use
+
 ✔ Lightweight: No external dependencies
 
 🛠️ Technologies Used
