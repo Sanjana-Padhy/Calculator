@@ -3,69 +3,139 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Calculator</title>
-  <link rel="stylesheet" href="calculator.css">
+  <title>Simple Calculator</title>
+
+  <style>
+    /* Basic page styling */
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #f3f4f6;
+    }
+
+    /* Calculator container */
+    .calculator {
+      background-color: white;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      width: 260px;
+    }
+
+    /* Display input box */
+    #display {
+      width: 100%;
+      height: 50px;
+      text-align: right;
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+    }
+
+    /* Button grid layout */
+    .buttons {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
+
+    /* Calculator buttons */
+    button {
+      padding: 15px;
+      font-size: 1.2rem;
+      border: none;
+      border-radius: 10px;
+      background-color: #e5e7eb;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+
+    /* Button hover effect */
+    button:hover {
+      background-color: #d1d5db;
+    }
+
+    /* Different color for operator buttons */
+    .operator {
+      background-color: #60a5fa;
+      color: white;
+    }
+
+    .operator:hover {
+      background-color: #3b82f6;
+    }
+  </style>
 </head>
+
 <body>
- <div id="calculator">
-    <input type="text" id="display" readonly >
-    <div class="button-container">
-  <button class="button" onclick="currentDisplay = '' 
-  document.querySelector('#display').value = currentDisplay;">C</button>
 
-  <button class="button" onclick="currentDisplay = currentDisplay + '1' 
-  document.querySelector('#display').value = currentDisplay;">1</button>
+  <!-- Calculator container -->
+  <div class="calculator">
+    <!-- Display input field -->
+    <input type="text" id="display" readonly>
 
-  <button class="button" onclick="currentDisplay = currentDisplay + '2' 
-  document.querySelector('#display').value = currentDisplay;">2</button>
+    <!-- Buttons container -->
+    <div class="buttons">
+      <!-- Each button performs a calculator function -->
+      <button onclick="clearDisplay()">C</button>
+      <button onclick="deleteChar()">DEL</button>
+      <button class="operator" onclick="appendToDisplay('/')">÷</button>
+      <button class="operator" onclick="appendToDisplay('*')">×</button>
 
-  <button class="button" onclick="currentDisplay = currentDisplay + '+' 
-  document.querySelector('#display').value = currentDisplay;">+</button>
+      <button onclick="appendToDisplay('7')">7</button>
+      <button onclick="appendToDisplay('8')">8</button>
+      <button onclick="appendToDisplay('9')">9</button>
+      <button class="operator" onclick="appendToDisplay('-')">−</button>
 
-  <button class="button" onclick="currentDisplay = currentDisplay + '3' 
-  document.querySelector('#display').value = currentDisplay;">3</button>
+      <button onclick="appendToDisplay('4')">4</button>
+      <button onclick="appendToDisplay('5')">5</button>
+      <button onclick="appendToDisplay('6')">6</button>
+      <button class="operator" onclick="appendToDisplay('+')">+</button>
 
-  <button class="button" onclick="currentDisplay = currentDisplay + '4' 
-  document.querySelector('#display').value = currentDisplay;">4</button>
+      <button onclick="appendToDisplay('1')">1</button>
+      <button onclick="appendToDisplay('2')">2</button>
+      <button onclick="appendToDisplay('3')">3</button>
+      <button rowspan="2" class="operator" onclick="calculateResult()">=</button>
 
-  <button class="button" onclick="currentDisplay = currentDisplay + '-' 
-  document.querySelector('#display').value = currentDisplay;">-</button>
+      <button onclick="appendToDisplay('0')">0</button>
+      <button onclick="appendToDisplay('.')">.</button>
+    </div>
+  </div>
 
-  <button class="button" onclick="currentDisplay = currentDisplay + '5' 
-  document.querySelector('#display').value = currentDisplay;">5</button>
-
-  <button class="button" onclick="currentDisplay = currentDisplay + '6' 
-  document.querySelector('#display').value = currentDisplay;">6</button>
-
-  <button class="button" onclick="currentDisplay = currentDisplay + '*' 
-  document.querySelector('#display').value = currentDisplay;">*</button>
-
-  <button class="button" onclick="currentDisplay = currentDisplay + '7' 
-  document.querySelector('#display').value = currentDisplay;">7</button>
-
-  <button class="button" onclick="currentDisplay = currentDisplay + '8' 
-  document.querySelector('#display').value = currentDisplay;">8</button>
-
-  <button class="button" onclick="currentDisplay = currentDisplay + '/' 
-  document.querySelector('#display').value = currentDisplay;">/</button>
-
-  <button class="button" onclick="
-  currentDisplay= eval(currentDisplay);
-  document.querySelector('#display').value = currentDisplay;">=</button>
-
-  <button class="button" onclick="currentDisplay = currentDisplay + '9' 
-  document.querySelector('#display').value = currentDisplay;">9</button>
-
-  <button class="button" onclick="currentDisplay = currentDisplay + '0' 
-  document.querySelector('#display').value = currentDisplay;">0</button>
-
-  <button class="button" onclick="currentDisplay = currentDisplay + '.' 
-  document.querySelector('#display').value = currentDisplay;">.</button>
-</div>
-
+  <!-- JavaScript for calculator logic -->
   <script>
-    let currentDisplay= '';
-    document.querySelector('#display').value = currentDisplay;
+    // Append a character to the display
+    function appendToDisplay(value) {
+      document.getElementById('display').value += value;
+    }
+
+    // Clear the display completely
+    function clearDisplay() {
+      document.getElementById('display').value = '';
+    }
+
+    // Delete the last character
+    function deleteChar() {
+      let current = document.getElementById('display').value;
+      document.getElementById('display').value = current.slice(0, -1);
+    }
+
+    // Evaluate the expression
+    function calculateResult() {
+      let expression = document.getElementById('display').value;
+      try {
+        document.getElementById('display').value = eval(expression);
+      } catch {
+        document.getElementById('display').value = 'Error';
+      }
+    }
   </script>
+
 </body>
-</html>  
+</html>
+
